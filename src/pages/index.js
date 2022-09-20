@@ -18,6 +18,8 @@ import { graphql, useStaticQuery } from 'gatsby'
 
 const IndexPage = ({ }) => {
 
+// data.allMarkdownRemark.nodes.html
+
   const data = useStaticQuery(graphql`
     query {
       notion(title: {eq: "About us"}) {
@@ -33,8 +35,27 @@ const IndexPage = ({ }) => {
       markdownRemark(frontmatter: {Title: {eq: "About Us"}}) {
         html
       }
+      allMarkdownRemark {
+        edges {
+          node {
+            html
+            frontmatter {
+              title
+            }
+          }
+        }
+      }
+      allNotion {
+        edges {
+          node {
+            markdownString
+            title
+          }
+        }
+      }
     }
   `)
+
 
   return (
     <Layout>
@@ -55,8 +76,25 @@ const IndexPage = ({ }) => {
           </div>
         </div>
       </header>
+      
 
-      <section id="about" className="about-section text-center">
+      {/* <section id="about" className="about-section text-center">
+        <div className="container">
+          <div className="row">
+            {data.allNotion.edges.map (({ node }) => (
+              <div className="col-lg-8 mx-auto">
+                <h2 className="text-white mb-4">{node}</h2>
+                <p className="text-white-50">
+                  <p>Hello</p>
+                </p>
+              </div>
+            ))}
+          </div>
+          <img src={ipad} className="img-fluid" alt="" />
+        </div>
+      </section>    */}
+
+      {/* <section id="about" className="about-section text-center">
         <div className="container">
           <div className="row">
             <div className="col-lg-8 mx-auto">
@@ -68,7 +106,7 @@ const IndexPage = ({ }) => {
           </div>
           <img src={ipad} className="img-fluid" alt="" />
         </div>
-      </section>
+      </section> */}
 
       <section id="projects" className="projects-section bg-light">
         <div className="container">
@@ -86,7 +124,7 @@ const IndexPage = ({ }) => {
             </div>
           </div>
 
-          <div className="row justify-content-center no-gutters mb-5 mb-lg-0">
+          {/* <div className="row justify-content-center no-gutters mb-5 mb-lg-0">
             <div className="col-lg-6">
               <img className="img-fluid" src={demoImage1} alt="" />
             </div>
@@ -106,9 +144,32 @@ const IndexPage = ({ }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
+          {data.allMarkdownRemark.edges.map (({ node }) => (
           <div className="row justify-content-center no-gutters">
+            <div className="col-lg-6">
+              <img className="img-fluid" src={demoImage2} alt="" />
+            </div>
+            <div className="col-lg-6 order-lg-first">
+              <div className="bg-black text-center h-100 project">
+                <div className="d-flex h-100">
+                  <div className="project-text w-100 my-auto text-center text-lg-right">
+                    <h4 className="text-white">{node.frontmatter.title}</h4>
+                    <p className="mb-0 text-white-50">
+                      <div
+                        className="notion-content"
+                        dangerouslySetInnerHTML={{ __html: node.html }}
+                      />
+                    </p>
+                    <hr className="d-none d-lg-block mb-0 mr-0" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          ))}
+          {/* <div className="row justify-content-center no-gutters">
             <div className="col-lg-6">
               <img className="img-fluid" src={demoImage2} alt="" />
             </div>
@@ -127,7 +188,7 @@ const IndexPage = ({ }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 

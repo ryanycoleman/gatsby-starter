@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "website"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-19lrltt205u4e"
+s3_prefix = "website"
+region = "us-west-2"
+capabilities = "CAPABILITY_NAMED_IAM"
+parameter_overrides = "SourceLocation=\"https://github.com/anubhavsrivastava/gatsby-starter-grayscale.git\" SourceVersion=\"master\""
+image_repositories = []

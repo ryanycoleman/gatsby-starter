@@ -77,7 +77,6 @@ const IndexPage = ({ }) => {
         </div>
       </header>
       
-
       {/* <section id="about" className="about-section text-center">
         <div className="container">
           <div className="row">

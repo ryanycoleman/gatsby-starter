@@ -124,7 +124,8 @@ const IndexPage = ({ }) => {
             </div>
           </div>
 
-          {/* <div className="row justify-content-center no-gutters mb-5 mb-lg-0">
+          {data.allMarkdownRemark.edges.map (({ node }) => (
+          <div className="row justify-content-center no-gutters mb-5 mb-lg-0">
             <div className="col-lg-6">
               <img className="img-fluid" src={demoImage1} alt="" />
             </div>
@@ -132,11 +133,11 @@ const IndexPage = ({ }) => {
               <div className="bg-black text-center h-100 project">
                 <div className="d-flex h-100">
                   <div className="project-text w-100 my-auto text-center text-lg-left">
-                    <h4 className="text-white">Misty</h4>
+                    <h4 className="text-white">{node.frontmatter.title}</h4>
                     <p className="mb-0 text-white-50">
                     <div
                       className="blog-post-content"
-                      dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}
+                      dangerouslySetInnerHTML={{ __html: node.html }}
                     />
                     </p>
                     <hr className="d-none d-lg-block mb-0 ml-0" />
@@ -144,7 +145,8 @@ const IndexPage = ({ }) => {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
+          ))}
 
           {data.allMarkdownRemark.edges.map (({ node }) => (
           <div className="row justify-content-center no-gutters">
@@ -158,7 +160,7 @@ const IndexPage = ({ }) => {
                     <h4 className="text-white">{node.frontmatter.title}</h4>
                     <p className="mb-0 text-white-50">
                       <div
-                        className="notion-content"
+                        className="blog-post-content"
                         dangerouslySetInnerHTML={{ __html: node.html }}
                       />
                     </p>
